@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+.page {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+.header {
+  margin: 0;
+  padding: 0 20px 0 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #fff;
+  min-width: 100%;
+  min-height: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.050);
+}
+
+.header__logo {
+  padding: 0;
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 700;
+  font-family: Ubuntu Mono, Arial, Helvetica, sans-serif;
+}
+
+.button {
+  padding: 5px 15px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 400;
+  font-family: Ubuntu Mono, Arial, Helvetica, sans-serif;
+  border: none;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #f5f7fa;
+  cursor: pointer;
+}
+
+.login__button {
+  padding: 5px 15px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 400;
+  font-family: Ubuntu Mono, Arial, Helvetica, sans-serif;
+  border: none;
+  border-radius: 20px;
+  background-color: #216bff;
+  color: #f5f7fa;
+  cursor: pointer;
+}
+
+.side-panel__button {
+  line-height: 1.2;
+  font-weight: 400;
+  font-family: Ubuntu Mono, Arial, Helvetica, sans-serif;
+  border: 2px solid #f5f7fa;
+}
+
+.task-list {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 20px;
+}
+
+.task-card {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-width: 100%;
+
+  background-color: #fff;
+  color: #48556e;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.035);
+  &_status_inprogress {
+    background-color: #1dce59;
+  }
+  &_status_resolved {
+    background-color: #216bff;
+    color: #f5f7fa;
+  }
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+  &__title {
+    margin: 0;
+    padding: 0;
+
+    font-family: Ubuntu Mono, Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  &__description {
+    margin: 10px 0 20px 0;
+    padding: 0;
+    min-height: 55px;
+
+    font-family: Ubuntu Mono, Arial, Helvetica, sans-serif;
+  }
+  &__author {
+    margin: 0;
+    padding: 0;
+    min-width: max-content;
+
+    font-family: Ubuntu Mono, Arial, Helvetica, sans-serif;
+  }
+  &__date {
+    margin: 0;
+    padding: 0;
+
+    font-family: Ubuntu Mono, Arial, Helvetica, sans-serif;
+  }
+  &__status {
+    width: 20px;
+    height: 20px;
+    align-self: center;
+
+    background-image: none;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: .6;
+    &_inprogress {
+      background-image: url("https://img.icons8.com/plumpy/48/000000/checkmark.png");
+    }
+    &_resolved {
+      background-image: url("https://img.icons8.com/plumpy/48/000000/double-tick.png");
+    }
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  overflow: hidden;
+}
+
+
+
+.side-panel {
+  margin: 0;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  min-width: 5px;
+  max-width: 5px;
+  background-color:#1dce59;
+  transition: all .25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  &:hover {
+    max-width: 350px;
+    min-width: 350px;
+    &::before {
+      transform: rotate(90deg) translateX(-50%) translateY(-50%);
+    }
+  }
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    min-height: 40px;
+    width: 40px;
+    background-color: #1dce59;
+    background-image: url("https://img.icons8.com/plumpy/24/000000/collapse-arrow.png");
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-position: center 0;
+    border-radius: 50%;
+    transform: rotate(-90deg) translateX(50%);
+    transition: all .25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  &_active {
+    min-width: 350px;
+  }
+  &__form {
+    margin: 10px;
+    padding: 0;
+  }
+}
+
+.footer {
+  padding: 0 20px;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  &__copyright {
+    padding: 0;
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 400;
+    font-family: Ubuntu Mono, Arial, Helvetica, sans-serif;
+    color: #48556e;
+  }
+}
