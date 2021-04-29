@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;900&display=swap");
 .page {
   margin: 0;
   padding: 0;
@@ -21,7 +20,7 @@
   background-color: #fff;
   min-width: 100%;
   min-height: 40px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.050);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 .header__logo {
@@ -38,7 +37,6 @@
 .input {
   margin: 0;
   padding: 5px 5px 5px 5px;
-
   max-height: 29px;
   min-width: 350px;
   box-sizing: border-box;
@@ -46,15 +44,14 @@
   line-height: 1.2;
   font-weight: 400;
   font-family: Inter, Arial, Helvetica, sans-serif;
-
   border: none;
   border-bottom: 2px solid #0069ff;
   background-color: transparent;
-  transition: all .25s ease-in-out;
-  &:hover {
-    padding: 0px 5px 5px 5px;
-    border-bottom: 3px solid #0069ff;
-  }
+  transition: all 0.25s ease-in-out;
+}
+.input:hover {
+  padding: 0px 5px 5px 5px;
+  border-bottom: 3px solid #0069ff;
 }
 
 .results {
@@ -75,46 +72,40 @@
   position: relative;
   margin: 0 0 15px 0;
   padding: 5px 15px;
-
   display: flex;
   flex-direction: row;
-
   justify-content: space-between;
-
   min-width: 100%;
   min-height: 50px;
   box-sizing: border-box;
-
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.025);
   border-radius: 10px;
-
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;
   font-family: Inter, Arial, Helvetica, sans-serif;
 }
 
-.result__status{
+.result__status {
   font-weight: 900;
-  &_ok {
-    color: #3ac267;
-  }
-  &_error {
-    color: #e52059;
-  }
-  &::before {
-    content: '';
-    // background-color: red;
-    width: auto;
-    height: 10px;
-    position: absolute;
-    bottom: 16px;
-    left: 15px;
-    right: 15px;
-    display: block;
-    border-bottom: 2px dotted black;
-  }
+}
+.result__status_ok {
+  color: #3ac267;
+}
+.result__status_error {
+  color: #e52059;
+}
+.result__status::before {
+  content: "";
+  width: auto;
+  height: 10px;
+  position: absolute;
+  bottom: 16px;
+  left: 15px;
+  right: 15px;
+  display: block;
+  border-bottom: 2px dotted black;
 }
 
 .button {
@@ -150,14 +141,13 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  &__copyright {
-    padding: 0;
-    margin: 0;
-
-    font-size: 14px;
-    line-height: 1.2;
-    font-weight: 400;
-    font-family: Inter, Arial, Helvetica, sans-serif;
-    color: #48556e;
-  }
+}
+.footer__copyright {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 400;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: #48556e;
 }

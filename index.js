@@ -1,55 +1,64 @@
-const apiSetting = {
-  url: 'https://api-seller.ozon.ru',
-  clientId: 53,
-  apiKey: '9c961062-d17e-47bd-bd9f-5e9953516073',
-}
+// базовый url API Ozon
+const baseUrl = 'https://api-seller.ozon.ru';
+
+// Импорт данных для подключения
+import {abdulaev, cll, decoM, comp, deco, stylishHouse} from './src/utils/constants.js';
+
+// Импорт класса API
+import Api from './src/components/api.js'
 
 // Ловим элементы
 const form = document.querySelector('.form');
 const formInput = form.querySelector('.form__input');
 const submitBtn = form.querySelector('.form__button');
+const resultContainer = document.querySelector('.results__content');
 
-let productId = []
+let productId = [];
 
-// Api-шка
-class Api {
-  constructor (url, ClientId, apiKey) {
-    this._url = url,
-    this._clientId = ClientId,
-    this._apiKey = apiKey
-  }
+// Api ИП Абдулаев
+const apiAbdulaev = new Api(baseUrl, abdulaev.clientId, abdulaev.apiKey);
 
-  _getResponseStatus (res) {
-    if (res.ok) {
-        return res.json();
-    } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-    }
+// Api ООО КЛЛ
+const apiCll = new Api(baseUrl, cll.clientId, cll.apiKey);
+
+// Api Декотекс - М
+const apiDecoM = new Api(baseUrl,decoM.clientId,decoM.apiKey);
+
+// Api ООО Комп
+const apiComp = new Api(baseUrl, comp.clientId, comp.apiKey);
+
+// Api Декотекс
+const apiDeco = new Api(baseUrl, deco.clientId, deco.apiKey);
+
+// Api ООО Стильный дом
+const apiStylishHouse = new Api(baseUrl, stylishHouse.clientId, stylishHouse.apiKey);
+
+function getTemplate () {
+  const resultTemplate = document.querySelector('.result-template').content
+  .querySelector('.result')
+  .cloneNode(true);
+
+  return resultTemplate;
 }
 
-  sendToArchive (productId) {
-    return fetch(`${this._url}/v1/product/archive`, {
-      method: 'POST',
-      headers: {
-        'Client-Id': this._clientId,
-        'Api-Key': this._apiKey,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        'product_id': productId
-      })
-    })
-    .then((res) => {
-      return this._getResponseStatus(res);
-    })
+function createResultItem(id, status) {
+  const result = getTemplate();
+
+  const resultId = result.querySelector('.result__text');
+  const resultStatus = result.querySelector('.result__status');
+
+  resultId.textContent = id;
+
+  if (status) {
+    resultStatus.classList.add('result__status_ok');
+    resultStatus.textContent = 'OK!';
+  } else {
+    resultStatus.classList.add('result__status_error');
+    resultStatus.textContent = 'ERROR!';
   }
+
+  return result;
 }
-
-const api = new Api(apiSetting.url, apiSetting.clientId, apiSetting.apiKey);
-
-console.log(form);
-console.log(formInput);
-console.log(submitBtn);
 
 function getInputValue(input) {
   productId = input.value.split(';');
@@ -58,10 +67,22 @@ function getInputValue(input) {
 
 function sendToArchive (event) {
   event.preventDefault();
+  resultContainer.innerHTML = '';
   getInputValue(formInput);
 
-  api.sendToArchive(productId)
-  .then((res) => console.log(res));
+  productId.forEach((item) => {
+    apiDeco.sendToArchive([item])
+    .then((res) => {
+      resultContainer.prepend(createResultItem(item, res.result));
+      console.log(res);
+    })
+    .catch(() => {
+      resultContainer.prepend(createResultItem(item, false));
+    })
+  });
 }
+
+
+// 71714494;71855762
 
 submitBtn.addEventListener('click', sendToArchive);
