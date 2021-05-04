@@ -8,14 +8,14 @@ export default class Api {
 
   _getResponseStatus (res) {
     if (res.ok) {
-        return res.json();
+       return res.json();
     } else {
         return Promise.reject(`Ошибка: ${res.status}`);
     }
 }
 
-  sendToArchive (productId) {
-    return fetch(`${this._url}/v1/product/archive`, {
+  async sendToArchive (productId) {
+    return await fetch(`${this._url}/v1/product/archive`, {
       method: 'POST',
       headers: {
         'Client-Id': this._clientId,
@@ -31,7 +31,20 @@ export default class Api {
     });
   }
 
-  refreshStocks() {
-
+  async removeFromArchive (productId) {
+    return await fetch(`${this._url}/v1/product/unarchive`, {
+      method: 'POST',
+      headers: {
+        'Client-Id': this._clientId,
+        'Api-Key': this._apiKey,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        'product_id': productId
+      })
+    })
+        .then((res) => {
+          return this._getResponseStatus(res);
+        });
   }
 }

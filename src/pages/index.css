@@ -28,16 +28,17 @@
   margin: 0;
   min-width: 150px;
   height: 60px;
-  background-image: url("./images/logo.png");
+  background-image: url("../images/logo.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
 
 .input {
+  position: relative;
   margin: 0;
-  padding: 5px 5px 5px 5px;
-  max-height: 29px;
+  padding: 5px;
+  max-height: 25px;
   min-width: 350px;
   box-sizing: border-box;
   font-size: 16px;
@@ -47,16 +48,21 @@
   border: none;
   border-bottom: 2px solid #0069ff;
   background-color: transparent;
-  transition: all 0.25s ease-in-out;
+  transition: border 0.125s ease-in-out;
 }
 .input:hover {
-  padding: 0px 5px 5px 5px;
-  border-bottom: 3px solid #0069ff;
+  padding: 5px;
+}
+.input:focus {
+  outline: none;
+  border-bottom: 4px solid #0069ff;
 }
 
 .results {
-  margin: 0 150px;
+  margin: 0 auto;
   padding: 0;
+  min-width: 650px;
+  max-width: 650px;
 }
 
 .results__heading {
@@ -66,6 +72,7 @@
   line-height: 1.2;
   font-weight: 900;
   font-family: Inter, Arial, Helvetica, sans-serif;
+  color: #48556e;
 }
 
 .result {
@@ -91,15 +98,15 @@
   font-weight: 900;
 }
 .result__status_ok {
-  color: #3ac267;
+  background-color: #3ac267;
 }
 .result__status_error {
-  color: #e52059;
+  background-color: #e52059;
 }
 .result__status::before {
   content: "";
   width: auto;
-  height: 10px;
+  height: 2px;
   position: absolute;
   bottom: 16px;
   left: 15px;
@@ -150,4 +157,41 @@
   font-weight: 400;
   font-family: Inter, Arial, Helvetica, sans-serif;
   color: #48556e;
+}
+
+.select {
+  position: relative;
+  width: 50%;
+  height: 29px;
+}
+.select::after {
+  position: absolute;
+  box-sizing: border-box;
+  z-index: 3;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  display: block;
+  content: "";
+  pointer-events: none;
+  width: 5px;
+  height: 5px;
+  background-color: transparent;
+  border-top: 5px solid #0069ff;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+.select__input {
+  padding: 5px 15px 5px 5px;
+  position: relative;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 400;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: #0069ff;
 }
