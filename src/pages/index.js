@@ -19,6 +19,8 @@ const selector = document.querySelector('.select__input');
 
 let currentApi;
 
+let switcher = document.querySelector('.switch__input').checked;
+
 // Api ИП Абдулаев
 const apiAbdulaev = new Api(baseUrl, abdulaev.clientId, abdulaev.apiKey);
 
@@ -42,27 +44,21 @@ function selectApi (option) {
   switch (option) {
     case 'apiAbdulaev':
       currentApi = apiAbdulaev;
-      console.log(option);
     break;
     case 'apiCll':
       currentApi = apiCll;
-      console.log(option);
     break;
     case 'apiDecoM':
       currentApi = apiDecoM;
-      console.log(option);
     break;
     case 'apiComp':
       currentApi = apiComp;
-      console.log(option);
     break;
     case 'apiDeco':
       currentApi = apiDeco;
-      console.log(option);
     break;
     case 'apiStylishHouse':
       currentApi = apiStylishHouse;
-      console.log(option);
     break;
   }
 }
@@ -153,10 +149,12 @@ function sendToArchiveHandler (event) {
   resultContainer.innerHTML = '';
 
   let i = 0;
+  switcher = document.querySelector('.switch__input').checked;
 
   selectApi(selector.value);
   getInputValue(formInput);
-  sendToArchive(currentApi, i, productId);
+
+  switcher ? removeFromArchive(currentApi, i, productId) : sendToArchive(currentApi, i, productId);
 }
 
 // 71738410 20683709 20684494
